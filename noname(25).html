@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beshy Text Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 48px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff, 0 0 70px #ff00ff;
+    }
+
+    .text-input {
+      position: relative;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #ff00ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      width: 100%;
+    }
+
+    .button i {
+      margin-right: 5px;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    #output {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      height: 200px;
+      font-family: 'Arial', sans-serif;
+      font-size: 20px;
+    }
+
+    .modes {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    #dark-mode-button {
+      background-color: #333;
+      width: 100%;
+    }
+
+    #light-mode-button {
+      background-color: #f9f9f9;
+      color: #333;
+      width: 100%;
+    }
+
+    body.dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
+
+    body.dark-mode .button {
+      background-color: #ff00ff;
+    }
+
+    body.dark-mode #dark-mode-button {
+      background-color: #ff00ff;
+    }
+
+    body.dark-mode #light-mode-button {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .emoji-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .emoji-button {
+      margin: 0 5px;
+      padding: 8px 12px;
+      background-color: #ff00ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .emoji-button i {
+      margin-right: 5px;
+    }
+
+    .emoji-button.orange {
+      background-color: #ff6600;
+    }
+
+    .emoji-button.blue {
+      background-color: #0099ff;
+    }
+
+    .emoji-button.green {
+      background-color: #00cc00;
+    }
+
+    @media (max-width: 500px) {
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button,
+      .emoji-buttons {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Beshy Text Generator</h1>
+    <div class="text-input">
+      <textarea id="input" placeholder="Enter your text here..." style="font-family: 'Arial', sans-serif; font-size: 24px;"></textarea>
+      <div class="controls">
+        <div style="width: 100%;">
+          <button id="copy-button" class="button"><i class="fas fa-copy"></i> Copy</button>
+          <button id="delete-button" class="button"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
+        <button id="convert-button" class="button"><i class="fas fa-magic"></i> Convert</button>
+      </div>
+    </div>
+    <div class="output">
+      <textarea id="output" readonly style="font-family: 'Arial', sans-serif; font-size: 24px;"></textarea>
+    </div>
+    <div class="modes">
+      <button id="dark-mode-button" class="button"><i class="fas fa-moon"></i> Dark Mode</button>
+      <button id="light-mode-button" class="button"><i class="fas fa-sun"></i> Light Mode</button>
+    </div>
+    <div class="emoji-buttons">
+      <button id="emoji-button-1" class="button emoji-button"><i class="fas fa-running"></i> 🤸</button>
+      <button id="emoji-button-2" class="button emoji-button orange"><i class="fas fa-running"></i> 🤸</button>
+      <button id="emoji-button-3" class="button emoji-button blue"><i class="fas fa-running"></i> 🤸</button>
+      <button id="emoji-button-4" class="button emoji-button green"><i class="fas fa-running"></i> 🤸</button>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const inputTextArea = document.getElementById("input");
+      const outputTextArea = document.getElementById("output");
+      const convertButton = document.getElementById("convert-button");
+      const copyButton = document.getElementById("copy-button");
+      const deleteButton = document.getElementById("delete-button");
+      const darkModeButton = document.getElementById("dark-mode-button");
+      const lightModeButton = document.getElementById("light-mode-button");
+      const emojiButtons = document.querySelectorAll(".emoji-button");
+
+      const emojis = ["🤸", "🤸🏼", "🤸🏻‍♂️", "🤸🏿‍♂️"];
+
+      let currentEmojiIndex = 0;
+
+      function generateBeshyText() {
+        const inputText = inputTextArea.value;
+        const beshyText = inputText.replace(/ /g, emojis[currentEmojiIndex]);
+        outputTextArea.value = beshyText;
+      }
+
+      function copyText() {
+        outputTextArea.select();
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+      }
+
+      function deleteText() {
+        inputTextArea.value = "";
+        outputTextArea.value = "";
+        currentEmojiIndex = 0;
+        convertButton.innerHTML = `<i class="fas fa-magic"></i> Convert to ${emojis[currentEmojiIndex]}`;
+      }
+
+      function toggleDarkMode() {
+        document.body.classList.add("dark-mode");
+        darkModeButton.disabled = true;
+        lightModeButton.disabled = false;
+      }
+
+      function toggleLightMode() {
+        document.body.classList.remove("dark-mode");
+        lightModeButton.disabled = true;
+        darkModeButton.disabled = false;
+      }
+
+      function changeConvertButton() {
+        currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length;
+        convertButton.innerHTML = `<i class="fas fa-magic"></i> Convert to ${emojis[currentEmojiIndex]}`;
+      }
+
+      convertButton.addEventListener("click", generateBeshyText);
+      copyButton.addEventListener("click", copyText);
+      deleteButton.addEventListener("click", deleteText);
+      darkModeButton.addEventListener("click", toggleDarkMode);
+      lightModeButton.addEventListener("click", toggleLightMode);
+
+      emojiButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          currentEmojiIndex = index;
+          convertButton.innerHTML = `<i class="fas fa-magic"></i> Convert to ${emojis[currentEmojiIndex]}`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
